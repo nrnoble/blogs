@@ -6,7 +6,7 @@
  * May 2017
  * Instructor: Tina Ostrander
  */
-
+//namespace blogs;
 //Require autoload
 require_once('vendor/autoload.php');
 
@@ -27,17 +27,21 @@ $f3->route ('GET /',
     {
         $myvar = "mayvartest";
         $f3->set('fatfree',"fatfree on wamp");
-        $view = new View;
-        echo $view->render('/pages/home.php');
-
+   //     $view = new View;
+      //  echo $view->render('/views/home.php');
+        echo \Template::instance()->render('/views/home.php');
     });
 
 
 $f3->route ('GET /foo',
-    function()
+    function($f3)
     {
-        $view = new View;
-        echo $view->render('/pages/home.php');
+        //$MembersDB = new \DatingSite\MembersDB();
+      //  $bloggers = new Blogsdb();
+
+
+
+        echo \Template::instance()->render('/views/home.php');
     });
 
 
