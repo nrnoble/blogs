@@ -79,7 +79,6 @@ function test()
 
 $f3->run();
 
-echo "test";
 
 
 

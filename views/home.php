@@ -21,11 +21,11 @@
                 <div class="container">
                     <div class="row">
 
-                    <repeat group="{{ @bloggers }}" value="{{ @blogger}}">
+                    <repeat group="{{ @bloggers }}" value="{{ @blogger }}">
 
                         <div class="col-md-3 col-sm-6 col-sm-12" >
                             <div>
-                                <image src="/328/blogs/profile_images/{{ trim(@blogger['profileimage']) }}" class="profileimage dropshadowing" >
+                                <img src="/328/blogs/profile_images/{{ trim(@blogger['profileimage']) }}" class="profileimage dropshadowing" alt="profile image" >
                                 <h3>{{ trim(@blogger['firstname']) }}   {{ trim(@blogger['lastname']) }}</h3>
                                     <hr>
                                     <span class ="alignleft"><a href="">view blogs</a></span><span class="alignright">total: 10</span><br>
@@ -35,7 +35,7 @@
                         </div>
                     </repeat>
                 </div>
-            </div>
+
             </div>
         </div>
             <hr>
@@ -43,7 +43,6 @@
         </div>
     </div>
 </header>
-
     <include href="/views/includes/libraryscripts-include.php" />
 
 </body>
