@@ -17,26 +17,11 @@
 
 
     <style>
-        .profileimage{
 
-            width: 214px;
-            height: 317px;
 
-        }
 
-        .alignleft {
-            float:left;
-        }
 
-        .alignright {
-            float: right;
-        }
-        .logosize{
-            width: 100px;
-            height:100px;
-        }
 
-    }
 
 
 
