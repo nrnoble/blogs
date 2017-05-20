@@ -28,13 +28,15 @@
             float:left;
         }
 
-        .alignright{
-            float:right;
+        .alignright {
+            float: right;
+        }
+        .logosize{
+            width: 100px;
+            height:100px;
+        }
 
-        .aligntop {
-        ;
-        }
-        }
+    }
 
 
 
@@ -43,6 +45,6 @@
 
 
 
-    <title>Blogs</title>
+    <title>Blogs2</title>
 
 </head>

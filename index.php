@@ -21,7 +21,7 @@ $f3 = Base::instance();
 $f3->set('DEBUG', 2);
 
 
-
+//Route to default page for The Blog Site
 $f3->route ('GET /',
     function($f3)
     {
@@ -46,7 +46,7 @@ $f3->route ('GET /',
 //      $f3->set('fruits',array('apple','orange ',' banana','lemon','grapfruit', 'peach', 'pear', 'cocanut','tangerine'));
         $f3->set('bloggers', $allBloggers);
 
-        echo \Template::instance()->render('/views/home.php');
+        echo \Template::instance()->render('/views/default-home.php');
 
 
 
@@ -62,22 +62,51 @@ $f3->route ('GET /foo',
     function($f3)
     {
         //$MembersDB = new \DatingSite\MembersDB();
-      //  $bloggers = new Blogsdb();
+        //  $bloggers = new Blogsdb();
 
 
 
-        echo \Template::instance()->render('/views/home.php');
+        echo \Template::instance()->render('/views/default-home.php');
     });
 
 
-function test()
-{
-    print_r($_SESSION);
-}
+/**
+ * route to about page
+ */
+$f3->route ('GET /about',
+    function($f3)
+    {
+        echo \Template::instance()->render('/views/about-us.php');
+    });
+
+/**
+ * route to new blogger signup page
+ */
+$f3->route ('GET /signup',
+    function($f3)
+    {
+        echo \Template::instance()->render('/views/new-blogger-signup.php');
+    });
+
+/**
+ * route to blogger signin page
+ */
+$f3->route ('GET /signin',
+    function($f3)
+    {
+        echo \Template::instance()->render('/views/blogger-signin.php');
+    });
 
 
 
-$f3->run();
+    function test()
+    {
+        print_r($_SESSION);
+    }
+
+
+
+    $f3->run();
 
 
 
