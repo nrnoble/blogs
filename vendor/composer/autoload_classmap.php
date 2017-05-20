@@ -11,6 +11,8 @@ return array(
     'Base' => $vendorDir . '/bcosca/fatfree-core/base.php',
     'Basket' => $vendorDir . '/bcosca/fatfree-core/basket.php',
     'Bcrypt' => $vendorDir . '/bcosca/fatfree-core/bcrypt.php',
+    'BlogPost' => $baseDir . '/classes/BlogPost.php',
+    'Blogger' => $baseDir . '/classes/Blogger.php',
     'CLI\\Agent' => $vendorDir . '/bcosca/fatfree-core/cli/ws.php',
     'CLI\\WS' => $vendorDir . '/bcosca/fatfree-core/cli/ws.php',
     'Cache' => $vendorDir . '/bcosca/fatfree-core/base.php',
@@ -47,4 +49,5 @@ return array(
     'Web\\OAuth2' => $vendorDir . '/bcosca/fatfree-core/web/oauth2.php',
     'Web\\OpenID' => $vendorDir . '/bcosca/fatfree-core/web/openid.php',
     'Web\\Pingback' => $vendorDir . '/bcosca/fatfree-core/web/pingback.php',
+    'blogs\\Blogsdb' => $baseDir . '/model/Blogsdb.php',
 );

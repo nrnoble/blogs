@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" createEmptyFolders="true" persistUploadOnCheckin="false" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="blogs.nrnoble.greenrivertech.net" createEmptyFolders="true" persistUploadOnCheckin="false" autoUploadExternalChanges="true">
     <serverData>
       <paths name="Portfolio">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="blogs.nrnoble.greenrivertech.net">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/www/328/blogs" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
@@ -33,7 +40,7 @@
       <paths name="nnoble.greenrivertech.net">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/www/328/blogs" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

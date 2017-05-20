@@ -12,6 +12,8 @@ class ComposerStaticInit2aa0cab56c6003650cd524d89c8483b5
         'Base' => __DIR__ . '/..' . '/bcosca/fatfree-core/base.php',
         'Basket' => __DIR__ . '/..' . '/bcosca/fatfree-core/basket.php',
         'Bcrypt' => __DIR__ . '/..' . '/bcosca/fatfree-core/bcrypt.php',
+        'BlogPost' => __DIR__ . '/../..' . '/classes/BlogPost.php',
+        'Blogger' => __DIR__ . '/../..' . '/classes/Blogger.php',
         'CLI\\Agent' => __DIR__ . '/..' . '/bcosca/fatfree-core/cli/ws.php',
         'CLI\\WS' => __DIR__ . '/..' . '/bcosca/fatfree-core/cli/ws.php',
         'Cache' => __DIR__ . '/..' . '/bcosca/fatfree-core/base.php',
@@ -48,6 +50,7 @@ class ComposerStaticInit2aa0cab56c6003650cd524d89c8483b5
         'Web\\OAuth2' => __DIR__ . '/..' . '/bcosca/fatfree-core/web/oauth2.php',
         'Web\\OpenID' => __DIR__ . '/..' . '/bcosca/fatfree-core/web/openid.php',
         'Web\\Pingback' => __DIR__ . '/..' . '/bcosca/fatfree-core/web/pingback.php',
+        'blogs\\Blogsdb' => __DIR__ . '/../..' . '/model/Blogsdb.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

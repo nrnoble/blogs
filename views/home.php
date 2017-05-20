@@ -34,9 +34,8 @@
                             </div>
                         </div>
                     </repeat>
-
                 </div>
-                </div>
+            </div>
             </div>
         </div>
             <hr>

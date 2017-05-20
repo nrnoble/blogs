@@ -25,11 +25,36 @@ $f3->set('DEBUG', 2);
 $f3->route ('GET /',
     function($f3)
     {
+
+
+
         $myvar = "mayvartest";
         $f3->set('fatfree',"fatfree on wamp");
-   //     $view = new View;
-      //  echo $view->render('/views/home.php');
+
+        $bloggers = new blogs\Blogsdb();
+        $results = $bloggers->getAllMembers();
+
+        $allBloggers = array();
+        foreach ($results as $blogger)
+        {
+            array_push($allBloggers, $blogger);
+           // array_push($allBloggers, $blogger['firstname']);
+            //echo $blogger['firstname'] . ", ";
+        }
+
+//      $f3->set('xzy', $results);
+//      $f3->set('fruits',array('apple','orange ',' banana','lemon','grapfruit', 'peach', 'pear', 'cocanut','tangerine'));
+        $f3->set('bloggers', $allBloggers);
+
         echo \Template::instance()->render('/views/home.php');
+
+
+
+
+
+
+
+
     });
 
 

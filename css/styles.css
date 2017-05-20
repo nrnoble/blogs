@@ -4,6 +4,16 @@
 /* May  2017                                      */
 /* Instructor: Tina Ostrander                     */
 
+.profileimage{
+
+    width: 214px;
+    height: 317px;
+
+}
+
+
+
+
 body
 {
     margin-top: 15px;
@@ -29,7 +39,7 @@ body
 
 
 /* Adapted from http://www.loriswebs.com/css-dropshadow.html*/
-.dropshadowimg
+.dropshadowing
 {
     border-radius: 5px;
 
