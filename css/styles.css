@@ -4,6 +4,19 @@
 /* May  2017                                      */
 /* Instructor: Tina Ostrander                     */
 
+
+
+.defaultbackgroundcolor{
+    background-color: #ebebeb;
+}
+
+
+.black{ background-color: black; height: 1px; border: 0; }
+
+hr {
+
+}
+
 .profileimage{
 
     width: 214px;

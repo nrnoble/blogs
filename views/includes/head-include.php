@@ -16,20 +16,6 @@
     <link rel="stylesheet" type="text/css" href="/328/blogs/css/styles.css">
 
 
-    <style>
-
-
-
-
-
-
-
-
-
-    </style>
-
-
-
-    <title>Blogs2</title>
+    <title>Blogs</title>
 
 </head>

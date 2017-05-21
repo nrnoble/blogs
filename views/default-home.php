@@ -6,7 +6,7 @@
 <body>
 
 <header class="bgimage">
-    <div class="container">
+    <div class="container defaultbackgroundcolor">
         <div class="row">
 
             <include href="/views/includes/navbar-include.php" />
@@ -23,7 +23,7 @@
 
                     <repeat group="{{ @bloggers }}" value="{{ @blogger }}">
 
-                        <div class="col-md-4 col-sm-6 col-sm-12" >
+                        <div class="col-md-3 col-sm-6 col-sm-12" >
                             <div>
                                 <img src="/328/blogs/profile_images/{{ trim(@blogger['profileimage']) }}" class="profileimage dropshadowing" alt="profile image" >
                                 <h3>{{ trim(@blogger['firstname']) }}   {{ trim(@blogger['lastname']) }}</h3>

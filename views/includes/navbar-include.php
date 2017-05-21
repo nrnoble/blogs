@@ -1,6 +1,6 @@
 
 
-<div class="col-md-12 col-sm-12 col-sm-12" >
+<div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor" >
     <h1>The Blog Site</h1>
     Your one-stop shop for internet blogs
     <hr>
