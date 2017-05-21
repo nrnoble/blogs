@@ -5,8 +5,8 @@
 
 <body>
 
-<header class="bgimage">
-    <div class="container defaultbackgroundcolor">
+<header class="bgimage ">
+    <div class="container defaultbackgroundcolor" >
         <div class="row">
 
             <include href="/views/includes/navbar-include.php" />

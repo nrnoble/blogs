@@ -10,4 +10,5 @@
 <!---->
 <!--</div>-->
 
-<include href="/views/includes/cols-include.php" />
+<!--<include href="/views/includes/cols-include.php" />-->
+<include href="/views/includes/emptyrow-include.php" />
