@@ -16,7 +16,7 @@ session_start();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
-
+//$_SESSION["f3"] = $f3;
 //Set debug level
 $f3->set('DEBUG', 2);
 
@@ -46,6 +46,7 @@ $f3->route ('GET /',
 //      $f3->set('fruits',array('apple','orange ',' banana','lemon','grapfruit', 'peach', 'pear', 'cocanut','tangerine'));
         $f3->set('bloggers', $allBloggers);
 
+        $f3->set('signedin', "true1");
         echo \Template::instance()->render('/views/default-home.php');
 
 
@@ -76,6 +77,7 @@ $f3->route ('GET /foo',
 $f3->route ('GET /about',
     function($f3)
     {
+        $f3->set('signedin', "true");
         echo \Template::instance()->render('/views/about-us.php');
     });
 
@@ -85,6 +87,7 @@ $f3->route ('GET /about',
 $f3->route ('GET /signup',
     function($f3)
     {
+        $f3->set('signedin', "true");
         echo \Template::instance()->render('/views/new-blogger-signup.php');
     });
 
@@ -94,6 +97,7 @@ $f3->route ('GET /signup',
 $f3->route ('GET /signin',
     function($f3)
     {
+        $f3->set('signedin', "true");
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
 
