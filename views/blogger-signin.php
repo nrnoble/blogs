@@ -27,17 +27,18 @@
                         <p class="paragraphIndent">To become a blogger, Register here: <a href="/328/blogs/signup">Free registration</a></p>
                     </div>
                     <include href="/views/includes/emptyrow-include.php" />
-                    <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor" >
-                        <p class="paragraphIndent">
-                            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                        </p>
+                    <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor" style="margin-top: 75px; margin-left: 100px" >
+                        <form action="/328/blogs/sigin" method="post" enctype="multipart/form-data">
+                            <input type="text" name="usernamne" id="fileToUpload" class="inline numbersOnly">
+                            <label class="control-label">Username</label><BR>
+                            <input type="text" name="password" id="passwordID" class=" inline numbersOnly">
+                            <label class="control-label">Password</label><br>
+
+                            <input type="submit" id="idimageSummit" class=" btn btn-primary" value="Log In" name="submit" style="margin-left: 60px; margin-top: 20px">
+                        </form>
                     </div>
                     <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor  " >
-                        <h3><p class="paragraphIndent">Hear what others are saying about us!</p></h3>
-                        <p class="paragraphIndent2">
-                            "laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem" - long time user Sally Nguyen<BR><BR>
-                            "aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto" - blog contributer Terry Stone<BR><BR>
-                        </p>
+
 
                     </div>
 
@@ -59,6 +60,28 @@
 
 
 </header>
+
+<script>
+    //    [0-9\-\(\)\s]+
+
+    $('.numbersOnly').returnValue(function () {
+        if (this.value != this.value.match(/^[a-zA-Z\-]+$/, '')) {
+            this.value = this.value.replace (/^[a-zA-Z\-]+$/, '');
+        }
+    });
+
+</script>
+
+<SCRIPT>
+    $('.phoneNumberFilter').keyup(function () {
+        if (this.value != this.value.match(/^[a-zA-Z\-]+$, '')) {
+            this.value = this.value.replace (/^[a-zA-Z\-]+$/, '');
+        }
+    });
+</SCRIPT>
+
+
+
 <include href="/views/includes/libraryscripts-include.php" />
 
 </body>

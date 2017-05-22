@@ -97,9 +97,28 @@ $f3->route ('GET /signup',
 $f3->route ('GET /signin',
     function($f3)
     {
+//        if ($_SESSION['blogger'] != "")
+//        {
+//            $LoggedOnBlogger = $_SESSION['blogger'];
+//            $f3->set('signedin', "true");
+//        }
+
+
+
+
         $f3->set('signedin', "true");
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
+
+$f3->route ('GET /signout',
+    function($f3)
+    {
+        $_SESSION['signedin'] = "false";
+        $f3->set('signedin', "false");
+        echo \Template::instance()->render('/views/blogger-signin.php');
+    });
+
+
 
 
 

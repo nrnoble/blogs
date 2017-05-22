@@ -1,3 +1,8 @@
+<?php
+session_start();
+$F3 =  $_SESSION["f3"]
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/328/blogs/css/styles.css">
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 
     <title>Blogs</title>
