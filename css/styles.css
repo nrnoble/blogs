@@ -5,6 +5,16 @@
 /* Instructor: Tina Ostrander                     */
 
 
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.portrait{
+    width: 214px;
+    height: 317px;
+}
+
 
 .defaultbackgroundcolor{
     background-color: #ebebeb;

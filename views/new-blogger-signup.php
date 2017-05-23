@@ -72,10 +72,10 @@ print_r($_POST);
                     <div class="col-md-5 col-sm-5 col-sm-12 defaultbackgroundcolor" >
 
                         above
-                        <?php echo '$_SESSION[\'imagePath\']' . $_SESSION['imagePath']; ?>
+<!--                        --><?php //echo '$_SESSION[\'imagePath\']' . $_SESSION['imagePath']; ?>
 
 
-                        <img src="/328/blogs/{{ @imagepath }}">-->
+                        <img src="/328/blogs/{{ @imagepath }}" class ="protrait">-->
 
 <!--                        <check if = "@imagepath != null">-->
 <!--                            <true>-->
@@ -88,7 +88,7 @@ print_r($_POST);
 <!--                                <img src="/328/blog" --><?php //echo $_SESSION['imagePath'] ?><!-- >-->
 <!--                            </false>-->
 <!--                        </check>-->
-                        below
+
                         <form action="/328/blogs/upload" method="post" enctype="multipart/form-data">
                             <label class="control-label">Change your profile picture</label>
                             <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-primary inline " style="width: 50%">
