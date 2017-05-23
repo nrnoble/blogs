@@ -5,7 +5,7 @@
 
     <check if ="{{ @signedin == 'true'}}">
         <true>
-            <a href="/328/blogs/signup"> Create Blog ></a><BR>
+            <a href="/328/blogs/create"> Create Blog ></a><BR>
         </true>
         <false>
             <a href="/328/blogs/signup">Become a Blogger ></a><BR>

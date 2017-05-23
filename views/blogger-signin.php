@@ -3,6 +3,18 @@
 
 <include href="/views/includes/head-include.php" />
 
+<!--TODO: Move all styles to styles.css-->
+    <style>
+        .submitbutton {
+            margin-left: 60px;
+            margin-top: 20px;
+        }
+        .formmargin {
+            margin-top: 75px;
+            margin-left: 100px;
+        }
+    </style>
+
 <body>
 
 <header class="bgimage">
@@ -20,21 +32,28 @@
 
                 <!--                <div class="container" >-->
                 <div class="row pageheight" >
-                    <!--                        <include href="/views/includes/cols-include.php" />-->
-                    <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor " >
+<!--             <include href="/views/includes/cols-include.php" />-->
+                    <div class="col-md-6 col-sm-6 col-sm-12 defaultbackgroundcolor " >
                         <h1><p class="paragraphIndent">Welcome Back!</p></h1>
                         <h3><p class="paragraphIndent">Register blogger log in below!</p></h3>
                         <p class="paragraphIndent">To become a blogger, Register here: <a href="/328/blogs/signup">Free registration</a></p>
                     </div>
-                    <include href="/views/includes/emptyrow-include.php" />
-                    <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor" style="margin-top: 75px; margin-left: 100px" >
-                        <form action="/328/blogs/sigin" method="post" enctype="multipart/form-data">
-                            <input type="text" name="usernamne" id="fileToUpload" class="inline numbersOnly">
+                    <div class="col-md-6 col-sm-6 col-sm-12 defaultbackgroundcolor " >
+                        <!--                        <h1><p class="paragraphIndent">Logo</p></h1>-->
+                        <img src="/328/blogs/images/lock.PNG">
+                    </div>
+
+<!--                    <include href="/views/includes/emptyrow-include.php" />-->
+
+                    <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor formmargin" >
+                        {{ @signinError }}
+                        <form action="/328/blogs/loginhandler" method="post" enctype="multipart/form-data">
+                            <input type="text" name="blogger" id="bloggerID" class="inline numbersOnly" value = "bjohnson">
                             <label class="control-label">Username</label><BR>
-                            <input type="text" name="password" id="passwordID" class=" inline numbersOnly">
+                            <input type="text" name="password" id="passwordID" class=" inline numbersOnly" value = "J$p1ter2">
                             <label class="control-label">Password</label><br>
 
-                            <input type="submit" id="idimageSummit" class=" btn btn-primary" value="Log In" name="submit" style="margin-left: 60px; margin-top: 20px">
+                            <input type="submit" id="idimageSummit" class=" btn btn-primary submitbutton" value="Log In" name="submit">
                         </form>
                     </div>
                     <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor  " >
@@ -48,7 +67,7 @@
                 <!--                    </div>-->
             </div>
         </div>
-        <hr>
+
         <!--            <img src ="./images/blogsiteimage.jpg">-->
     </div>
     <div class="row">

@@ -99,10 +99,11 @@ class Blogsdb
      *
      * @return string associative array of members indexed by id
      */
-    public function getAllMembers(){
+    public function getAllBloggers(){
         $select = 'SELECT * FROM nnoble_grcc.bloggers';
         //$select = 'SELECT firstname, lastname,  FROM members';
         $statement = $this->_dbConnection->prepare($select);
+        //$results = $statement->fetchall(PDO::FETCH_ASSOC);
         //$results = $statement->fetchall(PDO::FETCH_ASSOC);
         $results = $this->_dbConnection->query($select);
         return $results;
@@ -190,87 +191,99 @@ class Blogsdb
      * @return an associative array of blogger attributes, or false if
      * the blogger was not found
      */
-    public function memberById($member_id)
+    public function getBlogger($bloggerUserName)
     {
-        $select = 'SELECT * FROM members WHERE member_id=' . $member_id;
+        $select = 'SELECT * FROM bloggers WHERE userid=' . "'$bloggerUserName'";
         $statement = $this->_dbConnection->prepare($select);
-        $tableRows = $this->_dbConnection->query($select);
+        $statement->execute();
+        $results = $statement->fetch();
+        return $results;
+
+//        echo "userid=" . $results['userid'] ;
+//        ///$blogger = $this->_dbConnection->query($select);
+//        echo $blogger->getColumnMeta(1);
+//        echo "<BR>";
+//        print_r($blogger);
+//        echo "<BR>";
+//        return $blogger;
+
+
 
         //  echo "userid= ". $tableRows[0]['member_id'] ."<br>";
 
-        foreach ($tableRows as $row)
-        {
-            $member = null;
-            if ($row['premium'] == 1)
-            {
-                $member = new \DatingSite\PremiumMember($row['fname'],
-                    $row['lname'],
-                    $row['age'],
-                    $row['gender'],
-                    $row['phone'],
-                    1);
-
-                $member->setEmail($row['email']);
-                $member->setState($row['state']);
-                $member->setBio($row['bio']);
-                $member->setSeekingGender($row['seeking']);
-                $member->setInDoorInterests($row['indoor']);
-                $member->setOutDoorInterests($row['outdoor']);
-                $member->setImageLocation($row['image']);
-            }
-            else
-            {
-                $member = new \DatingSite\Member($row['firstName'],
-                    $row['lastName'],
-                    $row['age'],
-                    $row['gender'],
-                    $row['phone'],
-                    0);
-
-                $member->setEmail($row['email']);
-                $member->setState($row['state']);
-                $member->setBio($row['bio']);
-                $member->setSeekingGender($row['seeking']);
-            }
-
-            $_SESSION['member_id'] =  $row['member_id'];
-            $_SESSION['fname'] =  $row['fname'];
-            $_SESSION['fname'] =  $row['fname'];
-            $_SESSION['age'] =  $row['age'];
-            $_SESSION['phone'] =  $row['phone'];
-            $_SESSION['gender'] =  $row['gender'];
-            $_SESSION['email'] =  $row['email'];
-            $_SESSION['state'] =  $row['state'];
-            $_SESSION['bio'] =  $row['bio'];
-            $_SESSION['seeking'] =  $row['seeking'];
-            $_SESSION['indoor'] =  $row['indoor'];
-            $_SESSION['outdoor'] =  $row['outdoor'];
-            $_SESSION['premium'] =  $row['premium'];
-
-            $_SESSION['member_id'] =  $row['member_id'];
-            $_SESSION['fname'] =  $row['fname'];
-            $_SESSION['fname'] =  $row['fname'];
-            $_SESSION['age'] =  $row['age'];
-            $_SESSION['phone'] =  $row['phone'];
-            $_SESSION['gender'] =  $row['gender'];
-            $_SESSION['email'] =  $row['email'];
-            $_SESSION['state'] =  $row['state'];
-            $_SESSION['bio'] =  $row['bio'];
-            $_SESSION['seeking'] =  $row['seeking'];
-            $_SESSION['indoor'] =  $row['indoor'];
-            $_SESSION['outdoor'] =  $row['outdoor'];
-            $_SESSION['premium'] =  $row['premium'];
-        }
-        $rows = array();
-
-//        $rowdata = "";
-//        $statement = $this->_dbConnection->prepare($select);
-//        $statement->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-//        $statement->execute();
-//        $statement->fetch(PDO::FETCH_ASSOC);
-        //print_r($results);
-
-        return $member;
+//        foreach ($tableRows as $row)
+//        {
+//            $member = null;
+//            if ($row['premium'] == 1)
+//            {
+//                $member = new \DatingSite\PremiumMember($row['fname'],
+//                    $row['lname'],
+//                    $row['age'],
+//                    $row['gender'],
+//                    $row['phone'],
+//                    1);
+//
+//                $member->setEmail($row['email']);
+//                $member->setState($row['state']);
+//                $member->setBio($row['bio']);
+//                $member->setSeekingGender($row['seeking']);
+//                $member->setInDoorInterests($row['indoor']);
+//                $member->setOutDoorInterests($row['outdoor']);
+//                $member->setImageLocation($row['image']);
+//            }
+//            else
+//            {
+//                $member = new \DatingSite\Member($row['firstName'],
+//                    $row['lastName'],
+//                    $row['age'],
+//                    $row['gender'],
+//                    $row['phone'],
+//                    0);
+//
+//                $member->setEmail($row['email']);
+//                $member->setState($row['state']);
+//                $member->setBio($row['bio']);
+//                $member->setSeekingGender($row['seeking']);
+//            }
+//
+//            $_SESSION['member_id'] =  $row['member_id'];
+//            $_SESSION['fname'] =  $row['fname'];
+//            $_SESSION['fname'] =  $row['fname'];
+//            $_SESSION['age'] =  $row['age'];
+//            $_SESSION['phone'] =  $row['phone'];
+//            $_SESSION['gender'] =  $row['gender'];
+//            $_SESSION['email'] =  $row['email'];
+//            $_SESSION['state'] =  $row['state'];
+//            $_SESSION['bio'] =  $row['bio'];
+//            $_SESSION['seeking'] =  $row['seeking'];
+//            $_SESSION['indoor'] =  $row['indoor'];
+//            $_SESSION['outdoor'] =  $row['outdoor'];
+//            $_SESSION['premium'] =  $row['premium'];
+//
+//            $_SESSION['member_id'] =  $row['member_id'];
+//            $_SESSION['fname'] =  $row['fname'];
+//            $_SESSION['fname'] =  $row['fname'];
+//            $_SESSION['age'] =  $row['age'];
+//            $_SESSION['phone'] =  $row['phone'];
+//            $_SESSION['gender'] =  $row['gender'];
+//            $_SESSION['email'] =  $row['email'];
+//            $_SESSION['state'] =  $row['state'];
+//            $_SESSION['bio'] =  $row['bio'];
+//            $_SESSION['seeking'] =  $row['seeking'];
+//            $_SESSION['indoor'] =  $row['indoor'];
+//            $_SESSION['outdoor'] =  $row['outdoor'];
+//            $_SESSION['premium'] =  $row['premium'];
+//        }
+//        $rows = array();
+//
+////        $rowdata = "";
+////        $statement = $this->_dbConnection->prepare($select);
+////        $statement->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+////        $statement->execute();
+////        $statement->fetch(PDO::FETCH_ASSOC);
+//        //print_r($results);
+//
+//        return $member;
     }
 
 

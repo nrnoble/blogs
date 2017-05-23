@@ -19,13 +19,11 @@
  *     Email
  *     Bio;
  *     imageLocation
- *     blogs;
- *     isLoggedIn
  *
  * @author Neal Noble <nnoble2@mail.greenriver.edu>
  * @copyright 2017
  */
-class Blogger
+class Member
 {
     private $firstName;
     private $lastName;
@@ -35,29 +33,10 @@ class Blogger
     private $userid;
     private $passwordHash;
     private $imageLocation = "http://nnoble.greenrivertech.net/328/blogs/profile_images/defaultimage.png";
-    private $blogs;
-    private $isLoggedIn;
 
 
     /**
-     * @return mixed
-     */
-    public function getBlogs()
-    {
-        return $this->blogs;
-    }
-
-    /**
-     * @param mixed $blogs
-     */
-    public function setBlogs($blogs)
-    {
-        $this->blogs = $blogs;
-    }
-
-
-    /**
-     * blogger constructor.
+     * Member constructor.
      * @param $first name of user profile
      * @param $last name  of user profile
      * @param $yearsOld of user profile
@@ -68,13 +47,15 @@ class Blogger
     function __construct($userid, $first, $last, $gender, $bio, $passwordHash, $imageLocation)
     {
 //        Utilities::debug( "calling Member constructer: " . $first . ", " . $last .  ", " . $yearsOld . ", " . $sexualIdentity . ", " . $telephone . ", " . $premium);
-        $this->userid = $userid;
         $this->firstName = $first;
         $this->lastName = $last;
-        $this->gender = $gender;
-        $this->imageLocation = $imageLocation;
-        $this->passwordHash = $passwordHash;
+        $this->age = $yearsOld;
+        $this->gender = $sexualIdentity;
+        $this->phone = $telephone;
+        $this->premiumMember = $premium;
+        $this->imageLocation = "http://nnoble.greenrivertech.net/328/signup/images/placeholder.png";
     }
+
 
 
     /**
@@ -125,7 +106,27 @@ class Blogger
     {
         return $this->firstName . " " . $this->lastName;
     }
+    
 
+
+    /**
+     * Get age
+     * @return int age
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+
+    /**
+     * Set age
+     * @param int $age
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
 
 
     /**
@@ -144,6 +145,26 @@ class Blogger
     public function setGender($gender)
     {
         $this->gender = $gender;
+    }
+
+
+    /**
+     * Get contact phone number
+     * @return String phone number
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+
+    /**
+     * Set contact phone number
+     * @param String $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }
 
 
@@ -168,6 +189,45 @@ class Blogger
 
 
     /**
+     * Get State location
+     * @return String state
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+
+    /**
+     * Sets state location
+     * @param String $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+
+    /**
+     * get seeking gender
+     * @return string gender
+     */
+    public function getSeekingGender()
+    {
+        return $this->seekingGender;
+    }
+
+
+    /**
+     * Sets seeking gender
+     * @param String $seekingGender
+     */
+    public function setSeekingGender($seekingGender)
+    {
+        $this->seekingGender = $seekingGender;
+    }
+
+    /**
      * Get location of profile image
      * @return string Image location
      */
@@ -175,6 +235,7 @@ class Blogger
     {
         return $this->imageLocation;
     }
+
 
 
     /**
@@ -208,52 +269,25 @@ class Blogger
 
 
     /**
-     * @return mixed
+     * Get PremiumMember Status
+     * @return Boolean $PremiumMember
      */
-    public function getUserid()
+    public function getPremiumMember()
     {
-        return $this->userid;
+        //echo  "getting getPremiumMember(): " . $this->premiumMember . "<BR>";
+        return $this->premiumMember;
     }
+
 
     /**
-     * @param mixed $userid
+     * Set the status of premium membership.
+     * @param boolean $premiumMember
      */
-    public function setUserid($userid)
+    public function setPremiumMember($premiumMember)
     {
-        $this->userid = $userid;
+        //echo  "setting getPremiumMember(): " . $premiumMember . "<BR>";
+        $this->premiumMember = $premiumMember;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getPasswordHash()
-    {
-        return $this->passwordHash;
-    }
-
-    /**
-     * @param mixed $passwordHash
-     */
-    public function setPasswordHash($passwordHash)
-    {
-        $this->passwordHash = $passwordHash;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getisLoggedIn()
-    {
-        return $this->isLoggedIn;
-    }
-
-    /**
-     * @param mixed $isLoggedIn
-     */
-    public function setIsLoggedIn($isLoggedIn)
-    {
-        $this->isLoggedIn = $isLoggedIn;
-    }
-
+    
 
 }

@@ -15,6 +15,9 @@ $F3 =  $_SESSION["f3"]
         <div class="row">
 
             <include href="/views/includes/navbar-include.php" />
+<!--        <script>-->
+<!--            alert("banana".substring(2, 5) )-->
+<!--        </script>-->
 
         </div>
         <div class="">
@@ -28,12 +31,13 @@ $F3 =  $_SESSION["f3"]
 
                     <repeat group="{{ @bloggers }}" value="{{ @blogger }}">
 
-                        <div class="col-md-3 col-sm-6 col-sm-12" >
+                        <div class="col-md-2 col-sm-6 col-sm-12" >
                             <div>
-                                <img src="/328/blogs/profile_images/{{ trim(@blogger['profileimage']) }}" class="profileimage dropshadowing" alt="profile image" >
+                                <img src="/328/blogs/{{ trim(@blogger['profileimage']) }}" class="profileimage dropshadowing" alt="profile image" >
                                 <h3>{{ trim(@blogger['firstname']) }}   {{ trim(@blogger['lastname']) }}</h3>
                                     <hr>
-                                    <span class ="alignleft"><a href="">view blogs</a></span><span class="alignright">total: 10</span><br>
+<!--                                    TODO: total needs to become a valid count of number of blogs-->
+                                    <span class ="alignleft"><a href="">view blogs</a></span><span class="alignright">total: {{ @blogCount }}</span><br>
                                     <hr>
                                     {{ trim(@blogger['bio']) }}<br>
                             </div>
