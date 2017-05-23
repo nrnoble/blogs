@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-sm-12 defaultbackgroundcolor intent1">
                         {{ @signinError }}
-                        <form action="/328/blogs/signup" method="post" enctype="multipart/form-data">
+                        <form action="/328/blogs/add" method="post" enctype="multipart/form-data">
                             <input type="text" name="firstname" id="firstnameID" class="inline numbersOnly" value = "bob">
                             <label class="control-label">First Name</label><BR>
                             <input type="text" name="lastname" id="lastnameID" class="inline numbersOnly" value = "johnson">

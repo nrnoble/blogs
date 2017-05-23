@@ -37,6 +37,7 @@ class Blogger
     private $imageLocation = "http://nnoble.greenrivertech.net/328/blogs/profile_images/defaultimage.png";
     private $blogs;
     private $isLoggedIn;
+    private $id;
 
 
     /**
@@ -65,7 +66,7 @@ class Blogger
      * @param $telephone contact of user
      * @param $premium is true if Premium member. default is null
      */
-    function __construct($userid, $first, $last, $gender, $bio, $passwordHash, $imageLocation)
+    function __construct($userid, $first, $last, $gender, $bio, $passwordHash, $imageLocation,$id)
     {
 //        Utilities::debug( "calling Member constructer: " . $first . ", " . $last .  ", " . $yearsOld . ", " . $sexualIdentity . ", " . $telephone . ", " . $premium);
         $this->userid = $userid;
@@ -74,6 +75,7 @@ class Blogger
         $this->gender = $gender;
         $this->imageLocation = $imageLocation;
         $this->passwordHash = $passwordHash;
+        $this->id = $id;
     }
 
 

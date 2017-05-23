@@ -21,28 +21,16 @@ session_start();
 
 //Create an instance of the Base class
     $f3 = Base::instance();
-    //$_SESSION["f3"] = $f3;
-    //Set debug level
     $f3->set('DEBUG', 2);
 
 // F3 session
 new Session();
-//$f3->set(Session.signin, true);
 
-//if ($f3->get (Session.signin) == undefined) {
-//    $f3->set(Session . signin, false);
-//    echo "not set";
-//
-//}
-//else
-//{
-//    echo $f3->get (Session.signin);
-//}
 
 // Globals
 
 // Current logged in blogger, or new blogger. Set default profile image so there is something to display until user changes it.
-    $blogger = new Blogger("","","","","","","/profile_images/defaultprofileimage.jpg") ;
+    $blogger = new Blogger("","","","","","","/profile_images/defaultprofileimage.jpg",0) ;
 
 // Connection object to mySQL DB.
     $bloggersDb = new blogs\Blogsdb();
@@ -103,6 +91,30 @@ $f3->route ('POST|GET  /signup',
         $f3->set('imagepath',$blogger->getImageLocation());
         echo \Template::instance()->render('/views/new-blogger-signup.php');
     });
+
+$f3->route ('POST|GET  /add',
+    function() use ($f3,$blogger,$bloggersDb)
+    {
+        //TODO: need to verify that a blogger does not exist before adding a new blogger
+        $result = $bloggersDb->doesBloggerExist($_POST['userid']);
+
+//        $bloggersDb->addBlogger($_POST['firstname'],
+//                                $_POST['lastname'],
+//                                $_POST['gender'],
+//                                $_POST['email'],
+//                                $_POST['bio'],
+//                                $_POST['userid'],
+//                                $_POST['password'],
+//                                $_POST['password']
+//
+//        );
+
+        $f3->set('imagepath',$blogger->getImageLocation());
+        echo \Template::instance()->render('/views/new-blogger-signup.php');
+    });
+
+
+
 
 /**
  * route to blogger signin page
@@ -247,10 +259,5 @@ $f3->route ('POST|GET /upload',
 
 
     $f3->run();
-
-
-
-
-
 
 

@@ -17,11 +17,6 @@ function validateUser($f3,$blogger,$bloggersDb)
 
     $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName));
 
-//        echo '$blogger->getUserid(): ' . $blogger->getUserid() . "<BR>";
-//        echo '$blogger->getPasswordHash(): ' . $blogger->getPasswordHash(). "<BR>";
-//
-//        echo '$bloggerUserName: ' . $bloggerUserName . "<BR>";
-//        echo '$password: ' . $password . "<BR>";
 
     $loginValidated = false;
     if ($blogger->getUserid() == $bloggerUserName &&

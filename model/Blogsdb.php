@@ -62,10 +62,10 @@ class Blogsdb
      * @return {boolean} true if the insert was successful, otherwise false
      */
 
-    function addBlogger($firstname , $lastname, $gender, $email, $bio, $indoor, $outdoor, $image)
+    function addBlogger($firstname , $lastname, $gender, $email, $bio, $userid, $password, $imagelocation)
     {
-        $insert = 'INSERT INTO bloggers  (firstname,   $lastname,  $gender,  $email,  $bio,  $image, $userid, $passwordhash)
-                                 VALUES (:firstname,   :lastname,  :gender,  :email,  :bio,  :image, :userid, :passwordhash)';
+        $insert = 'INSERT INTO bloggers  (firstname,   $lastname,  $gender,  $email,  $bio,  $profileimage, $userid, $passwordhash)
+                                 VALUES (:firstname,   :lastname,  :gender,  :email,  :bio,  :profileimage, :userid, :passwordhash)';
 
 
         $statement = $this->_dbConnection->prepare($insert);
@@ -77,7 +77,7 @@ class Blogsdb
         $statement->bindValue(':email',   $email, PDO::PARAM_STR);
 
         $statement->bindValue(':bio',     $bio, PDO::PARAM_STR);
-        $statement->bindValue(':image',   $image, PDO::PARAM_STR);
+        $statement->bindValue(':profileimage',   $profileimage, PDO::PARAM_STR);
         $statement->bindValue(':userid',   $userid, PDO::PARAM_STR);
         $statement->bindValue(':passwordhash',   $passwordhash, PDO::PARAM_STR);
 
@@ -85,6 +85,7 @@ class Blogsdb
 
         //Return ID of inserted row
         return $this->_dbConnection->lastInsertId();
+
     }
 
     //READ
@@ -115,6 +116,18 @@ class Blogsdb
 
         return $resultsArray;
     }
+
+    public function doesBloggerExist($userID)
+    {
+      //  $select = "select count(1) from bloggers where userid = '" . $userID . "';";
+        $select = "select count(1) from bloggers where userid = \"bjohnson\"";
+        $statement = $this->_dbConnection->prepare($select);
+        $results = $statement->execute();
+        //$results = $this->_dbConnection->query($select);
+        print_r($results);
+        return $results;
+    }
+
 
 
     public function getTableRows()

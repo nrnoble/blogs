@@ -40,7 +40,8 @@ function createBloggerObject($sqlUserData){
         $sqlUserData["gender"],
         $sqlUserData["bio"],
         $sqlUserData["passwordhash"],
-        $sqlUserData["profileimage"]);
+        $sqlUserData["profileimage"],
+        $sqlUserData["id"]);
     return  $blogger;
 
 }
