@@ -1,7 +1,4 @@
-<?php
-session_start();
-$F3 =  $_SESSION["f3"]
-?>
+<?php session_start() ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +31,7 @@ $F3 =  $_SESSION["f3"]
                         <div class="col-md-2 col-sm-6 col-sm-12" >
                             <div>
                                 <img src="/328/blogs/{{ trim(@blogger['profileimage']) }}" class="profileimage dropshadowing" alt="profile image" >
-                                <h3>{{ trim(@blogger['firstname']) }}   {{ trim(@blogger['lastname']) }}</h3>
+                                <h3>{{ trim(@blogger['firstname']) }}</h3>
                                     <hr>
 <!--                                    TODO: total needs to become a valid count of number of blogs-->
                                     <span class ="alignleft"><a href="">view blogs</a></span><span class="alignright">total: {{ @blogCount }}</span><br>

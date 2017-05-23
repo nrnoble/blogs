@@ -25,6 +25,20 @@ session_start();
     //Set debug level
     $f3->set('DEBUG', 2);
 
+// F3 session
+new Session();
+//$f3->set(Session.signin, true);
+
+//if ($f3->get (Session.signin) == undefined) {
+//    $f3->set(Session . signin, false);
+//    echo "not set";
+//
+//}
+//else
+//{
+//    echo $f3->get (Session.signin);
+//}
+
 // Globals
 
 // Current logged in blogger, or new blogger. Set default profile image so there is something to display until user changes it.
@@ -42,6 +56,16 @@ session_start();
 // Fatfree base object
     $f3->set('imagepath',null);
 
+// set the default login in status to false
+    if (!isset($_SESSION['signedin']) ) {
+        $_SESSION['signedin'] = false;
+    }
+
+// set the f3 login status
+    if (isset($_SESSION['signedin'])){
+        $f3->set('signedin',$_SESSION['signedin']);
+    }
+
 
 
 //TODO: needs to be replaced with a valid count number for each blogger.
@@ -49,71 +73,23 @@ session_start();
 
 
 //Route to default page for The Blog Site
-$f3->route ('GET /',
+$f3->route ('POST|GET  /',
     function($f3) use ($bloggersDb, $allBloggers)
     {
 
-       // $myvar = "mayvartest";
-       // $f3->set('fatfree',"fatfree on wamp");
-
-        //$bloggers = new blogs\Blogsdb();
-       // $_SESSION['$bloggersdb']  = $bloggers;
-
-        // TODO: This need to be modified so that it only gets the top 10 bloggers.
-        // In the real world getting all bloggers would be far too many.
-        //$results = $bloggersDb->getAllBloggers();
-
-        //$allBloggers = array();
-//        foreach ($allBloggers as $blogger)
-//        {
-//            array_push($allBloggers, $blogger);
-//           // array_push($allBloggers, $blogger['firstname']);
-//            //echo $blogger['firstname'] . ", ";
-//        }
-
-//      $f3->set('xzy', $results);
-//      $f3->set('fruits',array('apple','orange ',' banana','lemon','grapfruit', 'peach', 'pear', 'cocanut','tangerine'));
         $f3->set('bloggers', $allBloggers);
-//        $f3->set('signedin', "true1");
         echo \Template::instance()->render('/views/default-home.php');
 
     });
 
-////TODO: move to DB object
-//    function getAllBloggers(){
-//
-//        $all = array();
-//        $bloggersDb = new blogs\Blogsdb();
-//        $results = $bloggersDb->getAllBloggers();
-//        foreach ($results as $blogger)
-//        {
-//            array_push($all, $blogger);
-//            // array_push($allBloggers, $blogger['firstname']);
-//            //echo $blogger['firstname'] . ", ";
-//        }
-//        return $all;
-//    }
-//
-////TODO: move to DB object
-//function getAllBloggerAsObjects($sqlBloggerData)
-//    {
-//        $all = array();
-//        foreach ($sqlBloggerData as $blogger)
-//        {
-//            $oBlogger = createBloggerObject($blogger);
-//            array_push($all, $oBlogger);
-//        }
-//        return $all;
-//    }
-
-
 /**
  * route to about page
  */
-$f3->route ('GET /about',
-    function($f3)
+$f3->route ('POST|GET  /about',
+    function() use ($f3)
     {
-        $f3->set('signedin', "true");
+        $f3->set('signedin',$_SESSION['signedin']);
+        print_r($_SESSION['signedin']);
         echo \Template::instance()->render('/views/about-us.php');
     });
 
@@ -121,32 +97,29 @@ $f3->route ('GET /about',
 /**
  * route to new blogger signup page
  */
-$f3->route ('GET /signup',
+$f3->route ('POST|GET  /signup',
     function() use ($f3,$blogger)
     {
         $f3->set('imagepath',$blogger->getImageLocation());
-        $f3->set('signedin', "true");
-        $f3->set('test22',$blogger->getImageLocation());
         echo \Template::instance()->render('/views/new-blogger-signup.php');
     });
 
 /**
  * route to blogger signin page
  */
-$f3->route ('GET /signin',
+$f3->route ('POST|GET  /signin',
     function($f3)
     {
         $f3->set('signinError', "");
-        $f3->set('signedin', "true");
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
 
 
-$f3->route ('GET /signout',
-    function($f3)
+$f3->route ('POST|GET  /signout',
+    function() use ($f3,$blogger)
     {
-///        $_SESSION['signedin'] = "false";
-        $f3->set('signedin', "false");
+        $blogger->setisLoggedIn(false);
+        $f3->set(Session.signin, false);
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
 
@@ -154,11 +127,9 @@ $f3->route ('GET /signout',
 /**
  * create route for create blog side menu item
  */
-$f3->route ('GET /create',
+$f3->route ('POST|GET  /create',
     function($f3)
     {
-
-        $f3->set('signedin', "true");
         echo \Template::instance()->render('/views/create-blog.php');
     });
 
@@ -168,46 +139,15 @@ $f3->route ('GET /create',
 /**
  * Handles login validation
  */
-$f3->route ('POST /loginhandler',
+$f3->route ('GET|POST /loginhandler',
     function($f3) use ($bloggersDb,$blogger)
     {
-
-        $loginValidated =  validateUser();
-
-//        $bloggerUserName ="";
-//        $password = "";
-//        $f3->set('signinError', "");
-//
-//        if (isset($_POST['password']) && (isset($_POST['blogger']))){
-//            $bloggerUserName =  $_POST['blogger'];
-//            $password =  $_POST['password'];
-//        }
-//        else {
-//            echo \Template::instance()->render('/views/blogger-signin.php');
-//        }
-//
-//        $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName));
-//
-////        echo '$blogger->getUserid(): ' . $blogger->getUserid() . "<BR>";
-////        echo '$blogger->getPasswordHash(): ' . $blogger->getPasswordHash(). "<BR>";
-////
-////        echo '$bloggerUserName: ' . $bloggerUserName . "<BR>";
-////        echo '$password: ' . $password . "<BR>";
-//
-//        $loginValidated = false;
-//        if ($blogger->getUserid() == $bloggerUserName &&
-//            $blogger->getPasswordHash() == $password) {
-//            $loginValidated = true;
-//            $blogger->setIsLoggedIn(true);
-//        }
-//        else
-//        {
-//            $f3->set('signedin', "false");
-//            $f3->set('signinError', "Blogger Username or password are invalid");
-//            echo \Template::instance()->render('/views/blogger-signin.php');
-//        }
-
-        $f3->set('signedin', $loginValidated);
+        $loginValidated =  validateUser($f3,$blogger,$bloggersDb);
+        $blogger->setisLoggedIn($loginValidated);
+        $f3->set('signedin', $blogger->getisLoggedIn());
+        $f3->set(Session.signin, $loginValidated);
+        $f3->set(Session.blogger, $blogger);
+       // echo "Session.signin: " . $f3->get(Session.signin);
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
 
@@ -298,79 +238,12 @@ $f3->route ('POST|GET /upload',
         $view = new View;
         $f3->set("files",$_FILES);
         echo \Template::instance()->render('/views/new-blogger-signup.php');
+       // echo \Template::instance()->render('/views/default-home.php');
   //      echo \Template::instance()->render('/views/new-blogger-signup.php');
-       // echo $view->render('/views/signup.php');
-//        header('Location: /328/blogs/signup');
+
 
         //print_r($imageFileName);
     });
-
-
-
-
-function validateUser($f3,$blogger){
-
-    $bloggerUserName ="";
-    $password = "";
-    $f3->set('signinError', "");
-
-    if (isset($_POST['password']) && (isset($_POST['blogger']))){
-        $bloggerUserName =  $_POST['blogger'];
-        $password =  $_POST['password'];
-    }
-    else {
-        echo \Template::instance()->render('/views/blogger-signin.php');
-    }
-
-    $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName));
-
-//        echo '$blogger->getUserid(): ' . $blogger->getUserid() . "<BR>";
-//        echo '$blogger->getPasswordHash(): ' . $blogger->getPasswordHash(). "<BR>";
-//
-//        echo '$bloggerUserName: ' . $bloggerUserName . "<BR>";
-//        echo '$password: ' . $password . "<BR>";
-
-    $loginValidated = false;
-    if ($blogger->getUserid() == $bloggerUserName &&
-        $blogger->getPasswordHash() == $password) {
-        $loginValidated = true;
-        $blogger->setIsLoggedIn(true);
-    }
-    else
-    {
-        $f3->set('signedin', "false");
-        $f3->set('signinError', "Blogger Username or password are invalid");
-        echo \Template::instance()->render('/views/blogger-signin.php');
-    }
-
-    return $loginValidated;
-
-}
-
-
-
-function test()
-    {
-        print_r($_SESSION);
-    }
-
-//    function createBloggerObject($sqlUserData){
-//
-//        //echo '$sqlUserData["userid"]: ' . $sqlUserData["userid"] . "<BR>";
-//
-//        $blogger = new Blogger($sqlUserData["userid"],
-//            $sqlUserData["firstname"],
-//            $sqlUserData["lastname"],
-//            $sqlUserData["gender"],
-//            $sqlUserData["bio"],
-//            $sqlUserData["passwordhash"],
-//            $sqlUserData["profileimage"]);
-//        return  $blogger;
-//
-//    }
-
-
-
 
 
     $f3->run();

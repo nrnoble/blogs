@@ -1,7 +1,5 @@
-<?php session_start();
-echo "test";
-print_r($_POST);
-?>
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +15,9 @@ print_r($_POST);
     .startbutton {
         margin-left: 60px;
         margin-top: 20px;
+    }
+    .chooserbutton{
+        style="width: 50%"
     }
 
 </style>
@@ -54,7 +55,7 @@ print_r($_POST);
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-sm-12 defaultbackgroundcolor intent1">
                         {{ @signinError }}
-                        <form action="/328/blogs/loginhandler" method="post" enctype="multipart/form-data">
+                        <form action="/328/blogs/signup" method="post" enctype="multipart/form-data">
                             <input type="text" name="firstname" id="firstnameID" class="inline numbersOnly" value = "bob">
                             <label class="control-label">First Name</label><BR>
                             <input type="text" name="lastname" id="lastnameID" class="inline numbersOnly" value = "johnson">
@@ -67,45 +68,39 @@ print_r($_POST);
                             <label class="control-label">Verify</label><br>
 
                             <input type="submit" id="idimageSummit" class=" btn btn-primary startbutton" value="Start Blogging" name="submit" >
-                        </form>
+<!--                        </form>-->
                     </div>
                     <div class="col-md-5 col-sm-5 col-sm-12 defaultbackgroundcolor" >
 
-                        above
-<!--                        --><?php //echo '$_SESSION[\'imagePath\']' . $_SESSION['imagePath']; ?>
-
-
-                        <img src="/328/blogs/{{ @imagepath }}" class ="protrait">-->
-
-<!--                        <check if = "@imagepath != null">-->
-<!--                            <true>-->
-<!--                                true-->
-<!--                                <img src="/328/blogs/profile_images/defaultprofileimage.jpg">-->
-<!--                            </true>-->
-<!--                            <false>-->
-<!--                                false {{@imagepath }}-->
-<!--<!--                                -->--><?php ////echo 'test $_SESSION[\'imagePath\']' . $_SESSION['imagePath']; ?>
-<!--                                <img src="/328/blog" --><?php //echo $_SESSION['imagePath'] ?><!-- >-->
-<!--                            </false>-->
-<!--                        </check>-->
+                        <img src="/328/blogs/{{ @imagepath }}" class ="protrait">
 
                         <form action="/328/blogs/upload" method="post" enctype="multipart/form-data">
                             <label class="control-label">Change your profile picture</label>
-                            <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-primary inline " style="width: 50%">
+                            <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-primary inline chooserbutton" >
                             <input type="submit" id="idimageSummit" class="inline btn btn-primary"  value="Upload Image" name="submit">
                         </form>
-                    </div>
 
-                    {{ @test22 }}
-                    {{ @files }}
+                    <BR><BR>
+                        <label for="bio">Biography</label>
+                        <textarea class="form-control" name="bio" id="bio" rows="7">{{ @bio }}</textarea>
+                    </div>
+<!--                    <div class="wrapper profilepagenextbutton">-->
+<!--                        <input type="submit" class="bet_time btn btn-primary" value="Next >">-->
+<!--                    </div>-->
+
+                </div>
+                </div>
+
+                       </form>
+
+                    </div>
 
 
                 </div>
-                <!--                    </div>-->
+
             </div>
         </div>
         <hr>
-        <!--            <img src ="./images/blogsiteimage.jpg">-->
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">

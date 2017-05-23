@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,14 +40,11 @@
 
                         </div>
 
-
-
                     </div>
-<!--                    </div>-->
                 </div>
             </div>
             <hr>
-<!--            <img src ="./images/blogsiteimage.jpg">-->
+
         </div>
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">

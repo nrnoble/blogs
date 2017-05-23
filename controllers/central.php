@@ -4,7 +4,6 @@ require_once('login.php');
 require_once('logout.php');
 
 
-//TODO: move to DB object
 function getAllBloggers(){
 
     $all = array();
@@ -19,7 +18,7 @@ function getAllBloggers(){
     return $all;
 }
 
-//TODO: move to DB object
+
 function getAllBloggerAsObjects($sqlBloggerData)
 {
     $all = array();

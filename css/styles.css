@@ -10,6 +10,11 @@ img {
     max-height: 100%;
 }
 
+.navbarheight{
+    height: 174px;
+}
+
+
 .portrait{
     width: 214px;
     height: 317px;
