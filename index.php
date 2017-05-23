@@ -9,7 +9,12 @@
 //namespace blogs;
 //Require autoload
 require_once('vendor/autoload.php');
+require_once('controllers/central.php');
 
+    ini_set('session.use_strict_mode', 1);
+    $sid = md5('wuxiancheng.cn');
+    session_id($sid);
+// var_dump(session_id() === $sid);// always false
 //Start the session
 session_start();
 
@@ -74,45 +79,32 @@ $f3->route ('GET /',
 
     });
 
-//TODO: move to DB object
-    function getAllBloggers(){
-
-        $all = array();
-        $bloggersDb = new blogs\Blogsdb();
-        $results = $bloggersDb->getAllBloggers();
-        foreach ($results as $blogger)
-        {
-            array_push($all, $blogger);
-            // array_push($allBloggers, $blogger['firstname']);
-            //echo $blogger['firstname'] . ", ";
-        }
-        return $all;
-    }
-
-//TODO: move to DB object
-function getAllBloggerAsObjects($sqlBloggerData)
-    {
-        $all = array();
-        foreach ($sqlBloggerData as $blogger)
-        {
-            $oBlogger = createBloggerObject($blogger);
-            array_push($all, $oBlogger);
-        }
-        return $all;
-    }
-
-
-//TODO: Remove
-$f3->route ('GET /foo',
-    function($f3)
-    {
-        //$MembersDB = new \DatingSite\MembersDB();
-        //  $bloggers = new Blogsdb();
-
-
-
-        echo \Template::instance()->render('/views/default-home.php');
-    });
+////TODO: move to DB object
+//    function getAllBloggers(){
+//
+//        $all = array();
+//        $bloggersDb = new blogs\Blogsdb();
+//        $results = $bloggersDb->getAllBloggers();
+//        foreach ($results as $blogger)
+//        {
+//            array_push($all, $blogger);
+//            // array_push($allBloggers, $blogger['firstname']);
+//            //echo $blogger['firstname'] . ", ";
+//        }
+//        return $all;
+//    }
+//
+////TODO: move to DB object
+//function getAllBloggerAsObjects($sqlBloggerData)
+//    {
+//        $all = array();
+//        foreach ($sqlBloggerData as $blogger)
+//        {
+//            $oBlogger = createBloggerObject($blogger);
+//            array_push($all, $oBlogger);
+//        }
+//        return $all;
+//    }
 
 
 /**
@@ -179,38 +171,41 @@ $f3->route ('GET /create',
 $f3->route ('POST /loginhandler',
     function($f3) use ($bloggersDb,$blogger)
     {
-        $bloggerUserName ="";
-        $password = "";
-        $f3->set('signinError', "");
 
-        if (isset($_POST['password']) && (isset($_POST['blogger']))){
-            $bloggerUserName =  $_POST['blogger'];
-            $password =  $_POST['password'];
-        }
-        else {
-            echo \Template::instance()->render('/views/blogger-signin.php');
-        }
+        $loginValidated =  validateUser();
 
-        $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName));
-
-//        echo '$blogger->getUserid(): ' . $blogger->getUserid() . "<BR>";
-//        echo '$blogger->getPasswordHash(): ' . $blogger->getPasswordHash(). "<BR>";
+//        $bloggerUserName ="";
+//        $password = "";
+//        $f3->set('signinError', "");
 //
-//        echo '$bloggerUserName: ' . $bloggerUserName . "<BR>";
-//        echo '$password: ' . $password . "<BR>";
-
-        $loginValidated = false;
-        if ($blogger->getUserid() == $bloggerUserName &&
-            $blogger->getPasswordHash() == $password) {
-            $loginValidated = true;
-            $blogger->setIsLoggedIn(true);
-        }
-        else
-        {
-            $f3->set('signedin', "false");
-            $f3->set('signinError', "Blogger Username or password are invalid");
-            echo \Template::instance()->render('/views/blogger-signin.php');
-        }
+//        if (isset($_POST['password']) && (isset($_POST['blogger']))){
+//            $bloggerUserName =  $_POST['blogger'];
+//            $password =  $_POST['password'];
+//        }
+//        else {
+//            echo \Template::instance()->render('/views/blogger-signin.php');
+//        }
+//
+//        $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName));
+//
+////        echo '$blogger->getUserid(): ' . $blogger->getUserid() . "<BR>";
+////        echo '$blogger->getPasswordHash(): ' . $blogger->getPasswordHash(). "<BR>";
+////
+////        echo '$bloggerUserName: ' . $bloggerUserName . "<BR>";
+////        echo '$password: ' . $password . "<BR>";
+//
+//        $loginValidated = false;
+//        if ($blogger->getUserid() == $bloggerUserName &&
+//            $blogger->getPasswordHash() == $password) {
+//            $loginValidated = true;
+//            $blogger->setIsLoggedIn(true);
+//        }
+//        else
+//        {
+//            $f3->set('signedin', "false");
+//            $f3->set('signinError', "Blogger Username or password are invalid");
+//            echo \Template::instance()->render('/views/blogger-signin.php');
+//        }
 
         $f3->set('signedin', $loginValidated);
         echo \Template::instance()->render('/views/blogger-signin.php');
@@ -313,7 +308,44 @@ $f3->route ('POST|GET /upload',
 
 
 
+function validateUser($f3,$blogger){
 
+    $bloggerUserName ="";
+    $password = "";
+    $f3->set('signinError', "");
+
+    if (isset($_POST['password']) && (isset($_POST['blogger']))){
+        $bloggerUserName =  $_POST['blogger'];
+        $password =  $_POST['password'];
+    }
+    else {
+        echo \Template::instance()->render('/views/blogger-signin.php');
+    }
+
+    $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName));
+
+//        echo '$blogger->getUserid(): ' . $blogger->getUserid() . "<BR>";
+//        echo '$blogger->getPasswordHash(): ' . $blogger->getPasswordHash(). "<BR>";
+//
+//        echo '$bloggerUserName: ' . $bloggerUserName . "<BR>";
+//        echo '$password: ' . $password . "<BR>";
+
+    $loginValidated = false;
+    if ($blogger->getUserid() == $bloggerUserName &&
+        $blogger->getPasswordHash() == $password) {
+        $loginValidated = true;
+        $blogger->setIsLoggedIn(true);
+    }
+    else
+    {
+        $f3->set('signedin', "false");
+        $f3->set('signinError', "Blogger Username or password are invalid");
+        echo \Template::instance()->render('/views/blogger-signin.php');
+    }
+
+    return $loginValidated;
+
+}
 
 
 
@@ -322,20 +354,20 @@ function test()
         print_r($_SESSION);
     }
 
-    function createBloggerObject($sqlUserData){
-
-        //echo '$sqlUserData["userid"]: ' . $sqlUserData["userid"] . "<BR>";
-
-        $blogger = new Blogger($sqlUserData["userid"],
-            $sqlUserData["firstname"],
-            $sqlUserData["lastname"],
-            $sqlUserData["gender"],
-            $sqlUserData["bio"],
-            $sqlUserData["passwordhash"],
-            $sqlUserData["profileimage"]);
-        return  $blogger;
-
-    }
+//    function createBloggerObject($sqlUserData){
+//
+//        //echo '$sqlUserData["userid"]: ' . $sqlUserData["userid"] . "<BR>";
+//
+//        $blogger = new Blogger($sqlUserData["userid"],
+//            $sqlUserData["firstname"],
+//            $sqlUserData["lastname"],
+//            $sqlUserData["gender"],
+//            $sqlUserData["bio"],
+//            $sqlUserData["passwordhash"],
+//            $sqlUserData["profileimage"]);
+//        return  $blogger;
+//
+//    }
 
 
 

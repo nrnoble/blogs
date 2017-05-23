@@ -117,24 +117,7 @@ print_r($_POST);
 
 </header>
 
-<script>
-    //    [0-9\-\(\)\s]+
 
-    $('.numbersOnly').returnValue(function () {
-        if (this.value != this.value.match(/^[a-zA-Z\-]+$/, '')) {
-            this.value = this.value.replace (/^[a-zA-Z\-]+$/, '');
-        }
-    });
-
-</script>
-
-<SCRIPT>
-    $('.phoneNumberFilter').keyup(function () {
-        if (this.value != this.value.match(/^[a-zA-Z\-]+$, '')) {
-            this.value = this.value.replace (/^[a-zA-Z\-]+$/, '');
-        }
-    });
-</SCRIPT>
 
 
 
