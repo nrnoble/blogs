@@ -54,36 +54,32 @@ class Blogsdb
 
     /**
      * Add a new blogger to the db.
-     * @param {string} $firstName the first name of the member
-     * @param {string} $lastName the last name of the member
-     * @param {string} $gender the gender of the member
-     * @param {string} $email the email of the member
-     * @param {string} $bio the members biography
+     * @param {string} $firstName the first name of the blogger
+     * @param {string} $lastName the last name of the blogger
+     * @param {string} $gender the gender of the blogger
+     * @param {string} $email the email of the blogger
+     * @param {string} $bio the blogger's biography
      * @return {boolean} true if the insert was successful, otherwise false
      */
 
-    function addMember($fname ,$lname, $age, $gender, $phone, $premium, $email, $state, $seeking,  $bio,  $indoor,  $outdoor, $image)
+    function addBlogger($firstname , $lastname, $gender, $email, $bio, $indoor, $outdoor, $image)
     {
-        $insert = 'INSERT INTO members  (fName,   lName,  age,  gender,  phone,  premium,  email,  state,  seeking,  bio,  indoor,  outdoor, image)
-                                 VALUES (:fName, :lName, :age, :gender, :phone, :premium, :email, :state, :seeking, :bio, :indoor, :outdoor, :image)';
+        $insert = 'INSERT INTO bloggers  (firstname,   $lastname,  $gender,  $email,  $bio,  $image, $userid, $passwordhash)
+                                 VALUES (:firstname,   :lastname,  :gender,  :email,  :bio,  :image, :userid, :passwordhash)';
 
-        //               $insert = "INSERT INTO members  (fname,  lname,  age,  gender, phone, premium, email, state,  seeking,  bio,  indoor,  outdoor, image)
-        //                            VALUES ('$fname','$lname',$age,'$gender', '$phone', premium, '$email', '$state', '$seeking',  '$bio',  '$indoor',  '$outdoor', '$image' )";
 
         $statement = $this->_dbConnection->prepare($insert);
-        $statement->bindValue(':fName',   $fname, PDO::PARAM_STR);
-        $statement->bindValue(':lName',   $lname, PDO::PARAM_STR);
-        $statement->bindValue(':age',     $age, PDO::PARAM_INT);
+        $statement->bindValue(':lastname',   lastname, PDO::PARAM_STR);
+        $statement->bindValue(':lastname',   lastname, PDO::PARAM_STR);
+
         $statement->bindValue(':gender',  $gender, PDO::PARAM_STR);
-        $statement->bindValue(':phone',   $phone, PDO::PARAM_STR);
-        $statement->bindValue(':premium', $premium, PDO::PARAM_INT);
+
         $statement->bindValue(':email',   $email, PDO::PARAM_STR);
-        $statement->bindValue(':state',   $state, PDO::PARAM_STR);
-        $statement->bindValue(':seeking', $seeking, PDO::PARAM_STR);
+
         $statement->bindValue(':bio',     $bio, PDO::PARAM_STR);
-        $statement->bindValue(':indoor',  $indoor, PDO::PARAM_STR);
-        $statement->bindValue(':outdoor', $outdoor, PDO::PARAM_STR);
         $statement->bindValue(':image',   $image, PDO::PARAM_STR);
+        $statement->bindValue(':userid',   $userid, PDO::PARAM_STR);
+        $statement->bindValue(':passwordhash',   $passwordhash, PDO::PARAM_STR);
 
         $statement->execute();
 
@@ -93,15 +89,15 @@ class Blogsdb
 
     //READ
     /**
-     * Returns all members in the database collection.
+     * Returns all bloggers in the database collection.
      *
      * @access public
      *
-     * @return string associative array of members indexed by id
+     * @return string associative array of blogger indexed by id
      */
     public function getAllBloggers(){
         $select = 'SELECT * FROM nnoble_grcc.bloggers';
-        //$select = 'SELECT firstname, lastname,  FROM members';
+        //$select = 'SELECT firstname, lastname,  FROM bloggers';
         $statement = $this->_dbConnection->prepare($select);
         //$results = $statement->fetchall(PDO::FETCH_ASSOC);
         //$results = $statement->fetchall(PDO::FETCH_ASSOC);
@@ -110,7 +106,7 @@ class Blogsdb
 
         $resultsArray = array();
 
-        //map each members id to a row of data for that pet
+        //map each blogger id to a row of data for that pet
         while ($row = $results->fetchAll(PDO::FETCH_COLUMN, 0)) {
             $resultsArray[$row['id']] = $row;
             //echo $row;
@@ -183,10 +179,10 @@ class Blogsdb
 
 
     /**
-     * Returns a member that has the given id.
+     * Returns a blogger that has the given id.
      *
      * @access public
-     * @param int $id the id of the members
+     * @param int $id the id of the blogger
      *
      * @return an associative array of blogger attributes, or false if
      * the blogger was not found
@@ -198,105 +194,19 @@ class Blogsdb
         $statement->execute();
         $results = $statement->fetch();
         return $results;
-
-//        echo "userid=" . $results['userid'] ;
-//        ///$blogger = $this->_dbConnection->query($select);
-//        echo $blogger->getColumnMeta(1);
-//        echo "<BR>";
-//        print_r($blogger);
-//        echo "<BR>";
-//        return $blogger;
-
-
-
-        //  echo "userid= ". $tableRows[0]['member_id'] ."<br>";
-
-//        foreach ($tableRows as $row)
-//        {
-//            $member = null;
-//            if ($row['premium'] == 1)
-//            {
-//                $member = new \DatingSite\PremiumMember($row['fname'],
-//                    $row['lname'],
-//                    $row['age'],
-//                    $row['gender'],
-//                    $row['phone'],
-//                    1);
-//
-//                $member->setEmail($row['email']);
-//                $member->setState($row['state']);
-//                $member->setBio($row['bio']);
-//                $member->setSeekingGender($row['seeking']);
-//                $member->setInDoorInterests($row['indoor']);
-//                $member->setOutDoorInterests($row['outdoor']);
-//                $member->setImageLocation($row['image']);
-//            }
-//            else
-//            {
-//                $member = new \DatingSite\Member($row['firstName'],
-//                    $row['lastName'],
-//                    $row['age'],
-//                    $row['gender'],
-//                    $row['phone'],
-//                    0);
-//
-//                $member->setEmail($row['email']);
-//                $member->setState($row['state']);
-//                $member->setBio($row['bio']);
-//                $member->setSeekingGender($row['seeking']);
-//            }
-//
-//            $_SESSION['member_id'] =  $row['member_id'];
-//            $_SESSION['fname'] =  $row['fname'];
-//            $_SESSION['fname'] =  $row['fname'];
-//            $_SESSION['age'] =  $row['age'];
-//            $_SESSION['phone'] =  $row['phone'];
-//            $_SESSION['gender'] =  $row['gender'];
-//            $_SESSION['email'] =  $row['email'];
-//            $_SESSION['state'] =  $row['state'];
-//            $_SESSION['bio'] =  $row['bio'];
-//            $_SESSION['seeking'] =  $row['seeking'];
-//            $_SESSION['indoor'] =  $row['indoor'];
-//            $_SESSION['outdoor'] =  $row['outdoor'];
-//            $_SESSION['premium'] =  $row['premium'];
-//
-//            $_SESSION['member_id'] =  $row['member_id'];
-//            $_SESSION['fname'] =  $row['fname'];
-//            $_SESSION['fname'] =  $row['fname'];
-//            $_SESSION['age'] =  $row['age'];
-//            $_SESSION['phone'] =  $row['phone'];
-//            $_SESSION['gender'] =  $row['gender'];
-//            $_SESSION['email'] =  $row['email'];
-//            $_SESSION['state'] =  $row['state'];
-//            $_SESSION['bio'] =  $row['bio'];
-//            $_SESSION['seeking'] =  $row['seeking'];
-//            $_SESSION['indoor'] =  $row['indoor'];
-//            $_SESSION['outdoor'] =  $row['outdoor'];
-//            $_SESSION['premium'] =  $row['premium'];
-//        }
-//        $rows = array();
-//
-////        $rowdata = "";
-////        $statement = $this->_dbConnection->prepare($select);
-////        $statement->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-////        $statement->execute();
-////        $statement->fetch(PDO::FETCH_ASSOC);
-//        //print_r($results);
-//
-//        return $member;
     }
 
 
 
     /**
-     * Deletes the member associated with the input id.
+     * Deletes the blogger associated with the input id.
      *
      * @access public
-     * @param int $id the id of the member
+     * @param int $id the id of the blogger
      *
      * @return true if the delete was successful, otherwise false
      */
-    function deleteMembers($id)
+    function deleteBlogger($id)
     {
         $delete = 'DELETE FROM members WHERE id=:id';
 
@@ -310,17 +220,17 @@ class Blogsdb
      * updates the image path
      *
      * @param String $imageLocation on server where the profile_images is stored
-     * @param int $id member id
+     * @param int $id blogger id
      */
     function updateImageLocations($imageLocation, $id)
     {
 
-        $update = 'UPDATE members SET image=:imageLocation
-                                   WHERE member_id=:id';
+        $update = 'UPDATE bloggers SET profileimage=:imageLocation
+                                   WHERE userid=:id';
 
         $statement = $this->_dbConnection->prepare($update);
-        $statement->bindValue(':imageLocation', $imageLocation, PDO::PARAM_STR);
-        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->bindValue(':profileimage', $imageLocation, PDO::PARAM_STR);
+        $statement->bindValue(':userid', $id, PDO::PARAM_INT);
         // echo "<br>Running image location update<br>";
         $statement->execute();
     }
