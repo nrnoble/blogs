@@ -1,7 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Neal
- * Date: 5/23/2017
- * Time: 12:44 AM
- */
+function logout($f3)
+{
+    $f3->set('SESSION.signedin' = false);
+}
