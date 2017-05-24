@@ -5,17 +5,6 @@
 
 <include href="/views/includes/head-include.php" />
 
-<!--TODO: Move all styles to styles.css-->
-    <style>
-        .submitbutton {
-            margin-left: 60px;
-            margin-top: 20px;
-        }
-        .formmargin {
-            margin-top: 75px;
-            margin-left: 100px;
-        }
-    </style>
 
 <body>
 

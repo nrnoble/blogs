@@ -15,7 +15,7 @@ function validateUser($f3,$blogger,$bloggersDb)
         echo \Template::instance()->render('/views/blogger-signin.php');
     }
 
-    $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName));
+    $blogger = createBloggerObject($bloggersDb->getBlogger($bloggerUserName),$bloggersDb);
 
 
     $loginValidated = false;

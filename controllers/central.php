@@ -47,3 +47,10 @@ function createBloggerObject($sqlUserData, $bloggersDb){
     return  $blogger;
 
 }
+
+function debugAlert($message){
+    echo "
+        <script> alert ('$message')</script>
+        
+        ";
+}

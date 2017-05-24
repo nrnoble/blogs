@@ -22,4 +22,12 @@
         </false>
     </check>
 
+    <check if ="{{ @SESSION.debug == true }}">
+        <true>
+            <a href="/328/blogs/debug">Debug ></a><BR>
+        </true>
+
+    </check>
+
+
 </div>

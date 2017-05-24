@@ -50,6 +50,7 @@ new Session();
         $_SESSION['signedin'] = false;
     }
 
+    //TODO: Delete this. no longer used
 // set the f3 login status
     if (isset($_SESSION['signedin'])){
         $f3->set('signedin',$_SESSION['signedin']);
@@ -99,23 +100,22 @@ $f3->route ('POST|GET  /add',
         //TODO: need to verify that a blogger does not exist before adding a new blogger
         $result = $bloggersDb->doesBloggerExist($_POST['userid']);
 
-//        $bloggersDb->addBlogger($_POST['firstname'],
-//                                $_POST['lastname'],
-//                                $_POST['gender'],
-//                                $_POST['email'],
-//                                $_POST['bio'],
-//                                $_POST['userid'],
-//                                $_POST['password'],
-//                                $_POST['password']
-//
-//        );
+        debugAlert($result);
 
         $f3->set('imagepath',$blogger->getImageLocation());
         echo \Template::instance()->render('/views/new-blogger-signup.php');
     });
 
 
+$f3->route ('POST|GET  /debug',
+    function() use ($f3,$blogger,$bloggersDb)
+    {
 
+        debugAlert($result);
+
+        $f3->set('imagepath',$blogger->getImageLocation());
+        echo \Template::instance()->render('/views/debug.php');
+    });
 
 /**
  * route to blogger signin page
@@ -128,6 +128,9 @@ $f3->route ('POST|GET  /signin',
     });
 
 
+/**
+ * Route that handles the signout
+ */
 $f3->route ('POST|GET  /signout',
     function() use ($f3,$blogger)
     {

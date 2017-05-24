@@ -5,6 +5,21 @@
 /* Instructor: Tina Ostrander                     */
 
 
+
+
+.submitbutton {
+    margin-left: 60px;
+    margin-top: 20px;
+}
+.formmargin {
+    margin-top: 75px;
+    margin-left: 100px;
+}
+
+
+
+
+
 .inline{
     display: inline-block;
 }
