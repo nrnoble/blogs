@@ -1,0 +1,13 @@
+Doc reference: https://fatfreeframework.com/3.6/session
+
+Does this code work exactly as described?
+I can not get it to work with the quotes.
+I can get it to work if I remove the quotes.
+Way too much time was spent debugging trying to figure out why my Blogs code was failing because variables were empty. 
+I'm a very frustrated camper on this one :)
+
+// just create an object
+new Session();
+
+$f3->set('SESSION.test',123);
+echo $f3->get('SESSION.test');

@@ -22,12 +22,24 @@ session_start();
 //Create an instance of the Base class
     $f3 = Base::instance();
     $f3->set('DEBUG', 2);
+    $f3->set('CACHE','memcache=localhost');
 
 // F3 session
-new Session();
-
 
 // Globals
+
+
+
+$f3->set('SESSION.debug', true);
+$signedin = $f3->get('SESSION.signedin');
+
+$f3->set('signedin','SESSION.signedin');
+
+debugAlert("signedin: " . $signedin);
+
+
+// debugAlert ($f3->get('SESSION.test'));
+// debugAlert ("mySessiontest" . $_SESSION['mytest']);
 
 // Connection object to mySQL DB.
     $bloggersDb = new blogs\Blogsdb();
@@ -40,7 +52,7 @@ new Session();
     $allBloggers = getAllBloggers();
 
 // collection of objects from the Blogger class.
-    $oBloggers = getAllBloggerAsObjects($allBloggers,$bloggersDb);
+    $oBloggers = getAllBloggerAsObjects($allBloggers, $bloggersDb);
 
 // Fatfree base object
     $f3->set('imagepath',null);
@@ -49,13 +61,6 @@ new Session();
     if (!isset($_SESSION['signedin']) ) {
         $_SESSION['signedin'] = false;
     }
-
-    //TODO: Delete this. no longer used
-// set the f3 login status
-    if (isset($_SESSION['signedin'])){
-        $f3->set('signedin',$_SESSION['signedin']);
-    }
-
 
 
 //TODO: needs to be replaced with a valid count number for each blogger.
@@ -111,7 +116,12 @@ $f3->route ('POST|GET  /debug',
     function() use ($f3,$blogger,$bloggersDb)
     {
 
-        debugAlert($result);
+//      debugAlert($f3->get(SESSION.debug));
+        $_SESSION['mytest'] = "mySessionTest";
+        debugAlert ("mySessiontest1: " . $_SESSION['mytest']);
+        $f3->set('SESSION.test',123);
+        $f3->set('SESSION.signedin', true);
+      //  debugAlert($signedin);
 
         $f3->set('imagepath',$blogger->getImageLocation());
         echo \Template::instance()->render('/views/debug.php');
@@ -135,7 +145,7 @@ $f3->route ('POST|GET  /signout',
     function() use ($f3,$blogger)
     {
         $blogger->setisLoggedIn(false);
-        $f3->set(Session.signin, false);
+        $f3->set(Session.signin, true);
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
 
