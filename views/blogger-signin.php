@@ -47,13 +47,15 @@
 
 <!--                    <include href="/views/includes/emptyrow-include.php" />-->
 
-                    <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor formmargin" >
+                    <div class="col-md-10 col-sm-12 col-sm-12 defaultbackgroundcolor formmargin" >
                         {{ @signinError }}
                         <form action="/328/blogs/loginhandler" method="post" enctype="multipart/form-data">
-                            <input type="text" name="blogger" id="bloggerID" class="inline form-control" value = "bjohnson">
+
+                            <input type="text" name="blogger" id="bloggerID" class=" form-control inline" value = "bjohnson" style="width: 150px">
                             <label class="control-label">Username</label><BR>
-                            <input type="text" name="password" id="passwordID" class=" inline form-control" value = "J$p1ter2">
-                            <label class="control-label">Password</label><br>
+
+                            <input type="password" name="password" id="passwordID" class="  form-control inline" value = "J$p1ter2" style="width: 150px">
+                            <label class="control-label">Password</label><BR>
 
                             <input type="submit" id="idimageSummit" class=" btn btn-primary submitbutton" value="Log In" name="submit">
                         </form>
