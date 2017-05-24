@@ -1,4 +1,8 @@
-function logout($f3)
+<?php
+
+function logout($f3,$blogger)
 {
-    $f3->set('SESSION.signedin' = false);
+    $blogger->setisLoggedIn(false);
+    $f3->set('signedin', false);
+    $f3->set('SESSION.signedin', false);
 }

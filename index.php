@@ -9,7 +9,7 @@
 //namespace blogs;
 //Require autoload
 require_once('vendor/autoload.php');
-require_once('controllers/central.php');
+
 
     ini_set('session.use_strict_mode', 1);
     $sid = md5('wuxiancheng.cn');
@@ -24,7 +24,10 @@ session_start();
     $f3->set('DEBUG', 2);
     $f3->set('CACHE','memcache=localhost');
 
-// F3 session
+
+// This require_once must come after $f3 has been created
+    require_once('controllers/central.php');
+
 
 // Globals
 
@@ -35,7 +38,7 @@ $signedin = $f3->get('SESSION.signedin');
 
 $f3->set('signedin','SESSION.signedin');
 
-debugAlert("signedin: " . $signedin);
+
 
 
 // debugAlert ($f3->get('SESSION.test'));
@@ -53,14 +56,6 @@ debugAlert("signedin: " . $signedin);
 
 // collection of objects from the Blogger class.
     $oBloggers = getAllBloggerAsObjects($allBloggers, $bloggersDb);
-
-// Fatfree base object
-    $f3->set('imagepath',null);
-
-// set the default login in status to false
-    if (!isset($_SESSION['signedin']) ) {
-        $_SESSION['signedin'] = false;
-    }
 
 
 //TODO: needs to be replaced with a valid count number for each blogger.
@@ -83,8 +78,6 @@ $f3->route ('POST|GET  /',
 $f3->route ('POST|GET  /about',
     function() use ($f3)
     {
-        $f3->set('signedin',$_SESSION['signedin']);
-        print_r($_SESSION['signedin']);
         echo \Template::instance()->render('/views/about-us.php');
     });
 
@@ -118,13 +111,15 @@ $f3->route ('POST|GET  /debug',
 
 //      debugAlert($f3->get(SESSION.debug));
         $_SESSION['mytest'] = "mySessionTest";
-        debugAlert ("mySessiontest1: " . $_SESSION['mytest']);
+//        debugAlert ("mySessiontest1: " . $_SESSION['mytest']);
         $f3->set('SESSION.test',123);
-        $f3->set('SESSION.signedin', true);
-      //  debugAlert($signedin);
+      //  $f3->set('SESSION.signedin', true);
+      //  $f3->set('SESSION.signedin', true);
+
 
         $f3->set('imagepath',$blogger->getImageLocation());
         echo \Template::instance()->render('/views/debug.php');
+        print_r($_SESSION);
     });
 
 /**
@@ -144,8 +139,11 @@ $f3->route ('POST|GET  /signin',
 $f3->route ('POST|GET  /signout',
     function() use ($f3,$blogger)
     {
-        $blogger->setisLoggedIn(false);
-        $f3->set(Session.signin, true);
+//        $blogger->setisLoggedIn(false);
+//        $f3->set(SESSSION.signin, false);
+//        $f3->set(signin, false);
+
+        logout($f3,$blogger);
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
 
@@ -171,8 +169,9 @@ $f3->route ('GET|POST /loginhandler',
         $loginValidated =  validateUser($f3,$blogger,$bloggersDb);
         $blogger->setisLoggedIn($loginValidated);
         $f3->set('signedin', $blogger->getisLoggedIn());
-        $f3->set(Session.signin, $loginValidated);
-        $f3->set(Session.blogger, $blogger);
+        $f3->set('SESSION.signedin', $loginValidated);
+//        $f3->set('SESSION.signedin', true);
+        $f3->set(SESSION.blogger, $blogger);
        // echo "Session.signin: " . $f3->get(Session.signin);
         echo \Template::instance()->render('/views/blogger-signin.php');
     });
