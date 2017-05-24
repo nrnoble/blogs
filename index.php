@@ -29,17 +29,18 @@ new Session();
 
 // Globals
 
-// Current logged in blogger, or new blogger. Set default profile image so there is something to display until user changes it.
-    $blogger = new Blogger("","","","","","","/profile_images/defaultprofileimage.jpg",0) ;
-
 // Connection object to mySQL DB.
     $bloggersDb = new blogs\Blogsdb();
+
+// Current logged in blogger, or new blogger. Set default profile image so there is something to display until user changes it.
+    $blogger = new Blogger("","","","","","","", "/profile_images/defaultprofileimage.jpg","",$bloggersDb) ;
+
 
 // SQL Data returned from db containning all bloggers.
     $allBloggers = getAllBloggers();
 
 // collection of objects from the Blogger class.
-    $oBloggers = getAllBloggerAsObjects($allBloggers);
+    $oBloggers = getAllBloggerAsObjects($allBloggers,$bloggersDb);
 
 // Fatfree base object
     $f3->set('imagepath',null);

@@ -19,18 +19,18 @@ function getAllBloggers(){
 }
 
 
-function getAllBloggerAsObjects($sqlBloggerData)
+function getAllBloggerAsObjects($sqlBloggerData,$bloggersDb)
 {
     $all = array();
     foreach ($sqlBloggerData as $blogger)
     {
-        $oBlogger = createBloggerObject($blogger);
+        $oBlogger = createBloggerObject($blogger,$bloggersDb);
         array_push($all, $oBlogger);
     }
     return $all;
 }
 
-function createBloggerObject($sqlUserData){
+function createBloggerObject($sqlUserData, $bloggersDb){
 
     //echo '$sqlUserData["userid"]: ' . $sqlUserData["userid"] . "<BR>";
 
@@ -38,10 +38,12 @@ function createBloggerObject($sqlUserData){
         $sqlUserData["firstname"],
         $sqlUserData["lastname"],
         $sqlUserData["gender"],
+        $sqlUserData["email"],
         $sqlUserData["bio"],
         $sqlUserData["passwordhash"],
         $sqlUserData["profileimage"],
-        $sqlUserData["id"]);
+        $sqlUserData["id"],
+        $bloggersDb);
     return  $blogger;
 
 }

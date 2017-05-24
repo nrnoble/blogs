@@ -50,9 +50,9 @@
                     <div class="col-md-12 col-sm-12 col-sm-12 defaultbackgroundcolor formmargin" >
                         {{ @signinError }}
                         <form action="/328/blogs/loginhandler" method="post" enctype="multipart/form-data">
-                            <input type="text" name="blogger" id="bloggerID" class="inline numbersOnly" value = "bjohnson">
+                            <input type="text" name="blogger" id="bloggerID" class="inline form-control" value = "bjohnson">
                             <label class="control-label">Username</label><BR>
-                            <input type="text" name="password" id="passwordID" class=" inline numbersOnly" value = "J$p1ter2">
+                            <input type="text" name="password" id="passwordID" class=" inline form-control" value = "J$p1ter2">
                             <label class="control-label">Password</label><br>
 
                             <input type="submit" id="idimageSummit" class=" btn btn-primary submitbutton" value="Log In" name="submit">

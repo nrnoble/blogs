@@ -21,6 +21,9 @@
  *     imageLocation
  *     blogs;
  *     isLoggedIn
+ *     blogcount
+ *     userid
+ *     passwordhash
  *
  * @author Neal Noble <nnoble2@mail.greenriver.edu>
  * @copyright 2017
@@ -38,18 +41,21 @@ class Blogger
     private $blogs;
     private $isLoggedIn;
     private $id;
+    private $blogCount;
+    private $bloggersDb;
 
 
     /**
-     * @return mixed
+     * @return collection of blogs entries as blogs entries as blogPosts objects objects
      */
     public function getBlogs()
     {
         return $this->blogs;
     }
 
+
     /**
-     * @param mixed $blogs
+     * @param  {blogPosts} sets collection of blogs entries as blogs entries as blogPosts objects objects
      */
     public function setBlogs($blogs)
     {
@@ -66,16 +72,27 @@ class Blogger
      * @param $telephone contact of user
      * @param $premium is true if Premium member. default is null
      */
-    function __construct($userid, $first, $last, $gender, $bio, $passwordHash, $imageLocation,$id)
+    function __construct($userid,
+                         $first,
+                         $last,
+                         $gender,
+                         $email,
+                         $bio,
+                         $passwordHash,
+                         $imageLocation,
+                         $id,
+                         $bloggersDb)
     {
-//        Utilities::debug( "calling Member constructer: " . $first . ", " . $last .  ", " . $yearsOld . ", " . $sexualIdentity . ", " . $telephone . ", " . $premium);
-        $this->userid = $userid;
-        $this->firstName = $first;
-        $this->lastName = $last;
-        $this->gender = $gender;
-        $this->imageLocation = $imageLocation;
-        $this->passwordHash = $passwordHash;
-        $this->id = $id;
+        $this->userid = $userid;                        //1
+        $this->firstName = $first;                      //2
+        $this->lastName = $last;                        //3
+        $this->gender = $gender;                        //4
+        $this->email = $email;                          //5
+        $this->bio = $bio;                              //6
+        $this->passwordHash = $passwordHash;            //7
+        $this->imageLocation = $imageLocation;          //8
+        $this->id = $id;                                //9
+        $this->bloggersDb = $bloggersDb;                   //10
     }
 
 
@@ -255,6 +272,14 @@ class Blogger
     public function setIsLoggedIn($isLoggedIn)
     {
         $this->isLoggedIn = $isLoggedIn;
+    }
+
+    /**
+     * @return int the total number of blog entries
+     */
+    public function getBlogCount()
+    {
+        return $this->blogCount;
     }
 
 
